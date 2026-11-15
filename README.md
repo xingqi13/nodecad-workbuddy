@@ -15,7 +15,7 @@ NodeCAD 是面向建筑节点分析与 CAD 绘图的 AI 技能，可用于参考
 
 ## 脚本运行
 
-需要 Python 3.11+ 和 `ezdxf`；在有授权的环境中安装 `nodecad/scripts/requirements.txt`。以下示例参数完全虚构，仅供检查脚本，不代表实际工程条件：
+先下载并解压 `nodecad-workbuddy.zip`；其中包含 `nodecad/` 源码目录。需要 Python 3.11+ 和 `ezdxf`，在有授权的环境中安装 `nodecad/scripts/requirements.txt`。在解压后的目录运行以下示例；参数完全虚构，仅供检查脚本，不代表实际工程条件：
 
 ```bash
 python nodecad/scripts/nodecad.py --params nodecad/examples/parapet-test.json --out parapet-test.dxf
