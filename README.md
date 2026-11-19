@@ -2,31 +2,23 @@
 
 NodeCAD 是面向建筑节点分析与 CAD 绘图的 AI 技能，可用于参考图识读、授权图集与规范线索检索、构造层次分析，以及节点大样的绘制和检查。技能支持 WorkBuddy 格式，也可由支持 SKILL.md 的智能体按其规则加载。
 
-## 功能
+## 1.2.0 离线使用
 
-- 分析屋面、墙身、地下防水、穿墙管和楼地面等节点的材料层次、连接、收头和排水关系。
-- 结合用户授权的资料定位图号、页码和引用，并组织剖面、填充、引线、尺寸及图名。
-- 内置两个 DXF 原型脚本：女儿墙示意、一类屋面泛水研究图。其他节点须结合图纸和环境逐项实现。
-- 在条件允许时辅助检查 CAD 的字体、尺寸、图块、裁剪、填充和打印；报告依据与未核问题。
+下载 [WorkBuddy 导入包](nodecad-workbuddy.zip)，在 WorkBuddy 技能页上传 ZIP。用于 Codex 时，下载 [Codex 技能包](nodecad-codex.zip)，将包内的 nodecad 目录放入技能目录。头像可单独取用 [512 px PNG](nodecad-avatar.png)。
 
-## WorkBuddy 导入
+首次试用可以直接说「没有本地图集，画一个干区地砖接浮铺木地板的剖面。两侧构造厚均为 45 mm，标出木侧净缝和盖条搭接」。包内有可调整的示例参数、室内和外围护构造指南、连续尺寸链和纸面表达方法。仅做构造分析、尺寸复核或审图时，直接读取技能即可。
 
-下载仓库中的 `nodecad-workbuddy.zip`，在 WorkBuddy 的技能页面选择添加、上传技能并选择该文件。图标在 `nodecad-avatar.png`（压缩包内也含有头像），如界面要求可单独上传。不同客户端的功能与名称可能有所差异。
+## 离线出图
 
-## 脚本运行
-
-先下载并解压 `nodecad-workbuddy.zip`；其中包含 `nodecad/` 源码目录。需要 Python 3.11+ 和 `ezdxf`，在有授权的环境中安装 `nodecad/scripts/requirements.txt`。在解压后的目录运行以下示例；参数完全虚构，仅供检查脚本，不代表实际工程条件：
+解压后在 nodecad 目录运行。地材交接 SVG 只需 Python 3.11+，使用系统浏览器即可打开。两个屋面 DXF 示例另需安装 scripts/requirements.txt 中的 ezdxf。
 
 ```bash
-python nodecad/scripts/nodecad.py --params nodecad/examples/parapet-test.json --out parapet-test.dxf
-python nodecad/scripts/detail_redraw.py --config nodecad/examples/flashing-study-test.json --out flashing-test.dxf
+python scripts/floor_section.py --params examples/floor-study.json --out floor.svg
+python scripts/nodecad.py --params examples/parapet-test.json --out parapet.dxf
+python scripts/detail_redraw.py --config examples/flashing-study-test.json --out flashing.dxf
 ```
 
-DXF 文字显示依赖目标 CAD 中可用的字体；请按需修改配置。项目没有附带 AutoCAD、图集、规范正文或用户工程图。
-
-## 重要边界
-
-两个脚本只生成指定范围的研究原型，不提供任意节点一键成图。需要明确项目条件、核对现行依据、目标 CAD 显示和实际打印比例；尺寸或填充是否关联需逐项验证。成果应由有资质的设计人员审查，不能直接当作施工图。
+参数文件采用演示工况。墙身、窗洞、灯槽、门套、湿区及地下节点可用包内方法按项目分析、审图或另行绘制。详图做法引用、产品性能、标准现行性和出图比例须结合对应原页、设备和项目核验。包内提供原创方法和引用线索，第三方图集、规范原文、工程图纸和字体由使用者按需取得。
 
 ## 许可
 
